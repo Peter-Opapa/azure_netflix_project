@@ -20,7 +20,7 @@ This project implements a **medallion architecture** (Bronze → Silver → Gold
 - **Gold Layer**: Business-ready aggregated data optimized for analytics, reporting, and machine learning
 
   **ADF**
-![ADF Pipeline Overview](./docs/images/adf_overview.png)
+![ADF Pipeline Details](./docs/images/ADF_Pipeline.png)
 
   **Databricks**
 ![Databricks Compute](./docs/images/compute_with_unity_catalog.png)
