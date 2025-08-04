@@ -19,7 +19,15 @@ This project implements a **medallion architecture** (Bronze → Silver → Gold
 - **Silver Layer**: Cleaned, validated, and transformed data using Delta Lake tables with data quality enforcement
 - **Gold Layer**: Business-ready aggregated data optimized for analytics, reporting, and machine learning
 
+  **ADF**
+![ADF Pipeline Overview](./docs/images/adf_overview.png)
+
+  **Databricks**
+![Databricks Compute](./docs/images/compute_with_unity_catalog.png)
+
+  **ADLS Gen2**
 ![ADL Overview](./docs/images/ADL_overview.png)
+
 
 ## 📁 Project Structure
 
@@ -131,9 +139,9 @@ Before getting started, ensure you have:
    docs/setup/SETUP.md
    ```
 
-## 🔄 Data Pipeline Flow
+## 🔄 Data Pipeline Runs
 
-![ADF Pipeline Overview](./docs/images/adf_overview.png)
+![Pipeline Runs](./docs/images/Pipeline-runs.png)
 
 ### Phase 1: Data Ingestion 📥
 **Azure Data Factory** orchestrates the ingestion process:
@@ -149,8 +157,6 @@ Before getting started, ensure you have:
 - Automatic schema inference and evolution
 - Creates Delta tables for ACID compliance
 
-![Databricks Compute](./docs/images/compute_with_unity_catalog.png)
-
 ### Phase 3: Silver Layer Transformation 🥈
 **Data cleaning and validation**:
 - Removes duplicates and handles null values
@@ -165,7 +171,6 @@ Before getting started, ensure you have:
 - Optimizes for query performance
 - Prepares features for machine learning
 
-![Pipeline Runs](./docs/images/Pipeline-runs.png)
 
 ### ForEach Activity Implementation
 ![ForEach Activity](./docs/images/ForEachActivity.png)
@@ -246,7 +251,7 @@ pytest --cov=src tests/
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! Please see the [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### 🐛 Reporting Issues
 - Use GitHub Issues for bug reports
