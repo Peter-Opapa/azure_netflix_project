@@ -19,13 +19,13 @@ This project implements a **medallion architecture** (Bronze → Silver → Gold
 - **Silver Layer**: Cleaned, validated, and transformed data using Delta Lake tables with data quality enforcement
 - **Gold Layer**: Business-ready aggregated data optimized for analytics, reporting, and machine learning
 
-  **ADF**
+  **ADF(Overview)**
 ![ADF Pipeline Details](./docs/images/ADF_Pipeline.png)
 
-  **Databricks**
+  **Databricks(Compute Instance with Unity Catalog)**
 ![Databricks Compute](./docs/images/compute_with_unity_catalog.png)
 
-  **ADLS Gen2**
+  **ADLS Gen2(Set-Up)**
 ![ADL Overview](./docs/images/ADL_overview.png)
 
 
