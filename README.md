@@ -1,11 +1,11 @@
-# 🎬 Netflix Data Engineering Pipeline on Azure
+# 🎬 Netflix Data Engineering Pipeline on Azure with Unity Catalog
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
 [![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=flat&logo=databricks&logoColor=white)](https://databricks.com/)
 [![Delta Lake](https://img.shields.io/badge/Delta%20Lake-00ADD4?style=flat&logo=delta&logoColor=white)](https://delta.io/)
 
-A comprehensive, production-ready data engineering solution for Netflix dataset analysis implementing modern data lakehouse architecture using Azure Data Factory, Azure Data Lake Storage Gen2, and Databricks with Delta Lake.
+A comprehensive, production-ready data engineering solution for Netflix dataset analysis implementing modern data lakehouse architecture using Azure Data Factory, Azure Data Lake Storage Gen2, and Databricks with Delta Lake and Delta Live Tables.
 
 ## 🏗️ Architecture Overview
 
@@ -25,13 +25,13 @@ This project implements a **medallion architecture** (Bronze → Silver → Gold
 
 ```
 📦 Netflix-Data-Pipeline/
-├── 📚 docs/                           # Documentation and architecture diagrams
-│   ├── 🖼️ images/                     # Architecture diagrams and screenshots
-│   └── 🔧 setup/                      # Setup and deployment guides
-├── 🏗️ infrastructure/                 # Infrastructure as Code
-│   ├── 🏭 adf/                        # Azure Data Factory pipelines and configurations
-│   ├── ⚡ databricks/                 # Databricks workspace configurations
-│   └── 💾 storage/                    # ADLS Gen2 configurations
+├── 📚 docs/                          # Documentation and architecture diagrams
+│   ├── 🖼️ images/                    # Architecture diagrams and screenshots
+│   └── 🔧 setup/                     # Setup and deployment guides
+├── 🏗️ infrastructure/                # Infrastructure as Code
+│   ├── 🏭 adf/                       # Azure Data Factory pipelines and configurations
+│   ├── ⚡ databricks/                # Databricks workspace configurations
+│   └── 💾 storage/                   # ADLS Gen2 configurations
 ├── 💻 src/                           # Source code
 │   ├── 📊 databricks/                # Databricks notebooks and scripts
 │   │   ├── 🥉 bronze/                # Bronze layer transformations (raw data ingestion)
@@ -309,6 +309,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [![GitHub stars](https://img.shields.io/github/stars/your-username/netflix-data-pipeline.svg?style=social&label=Star)](https://github.com/your-username/netflix-data-pipeline)
 [![GitHub forks](https://img.shields.io/github/forks/your-username/netflix-data-pipeline.svg?style=social&label=Fork)](https://github.com/your-username/netflix-data-pipeline/fork)
 
-**Built with ❤️ for the Data Engineering Community**
+**Built with ❤️ by Peter**
 
 </div>
