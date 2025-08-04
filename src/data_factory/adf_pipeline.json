@@ -1,0 +1,195 @@
+{
+    "name": "GitToDataLake",
+    "properties": {
+        "activities": [
+            {
+                "name": "ForEachFile",
+                "type": "ForEach",
+                "dependsOn": [
+                    {
+                        "activity": "ValidationGit",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@pipeline().parameters.p_array",
+                        "type": "Expression"
+                    },
+                    "isSequential": false,
+                    "activities": [
+                        {
+                            "name": "CopyGitData",
+                            "type": "Copy",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.12:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "DelimitedTextSource",
+                                    "storeSettings": {
+                                        "type": "HttpReadSettings",
+                                        "requestMethod": "GET"
+                                    },
+                                    "formatSettings": {
+                                        "type": "DelimitedTextReadSettings"
+                                    }
+                                },
+                                "sink": {
+                                    "type": "DelimitedTextSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "DelimitedTextWriteSettings",
+                                        "quoteAllText": true,
+                                        "fileExtension": ".txt"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "translator": {
+                                    "type": "TabularTranslator",
+                                    "typeConversion": true,
+                                    "typeConversionSettings": {
+                                        "allowDataTruncation": true,
+                                        "treatBooleanAsNumber": false
+                                    }
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "ds_github",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "file_name": {
+                                            "value": "@item().file_name",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_sink",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "folder_name": {
+                                            "value": "@item().folder_name",
+                                            "type": "Expression"
+                                        },
+                                        "file_name": {
+                                            "value": "@item().file_name",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "ValidationGit",
+                "type": "Validation",
+                "dependsOn": [
+                    {
+                        "activity": "Set variable Git",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "ds_validation",
+                        "type": "DatasetReference"
+                    },
+                    "timeout": "0.12:00:00",
+                    "sleep": 10
+                }
+            },
+            {
+                "name": "GitWeb",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "method": "GET",
+                    "url": "https://raw.githubusercontent.com/anshlambagit/Netflix_Azure_Data_Engineering_Project/refs/heads/main/RawData_AND_Notebooks/netflix_cast.csv"
+                }
+            },
+            {
+                "name": "Set variable Git",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "GitWeb",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "metadatagit",
+                    "value": {
+                        "value": "@activity('GitWeb').output.Response",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_array": {
+                "type": "array",
+                "defaultValue": [
+                    {
+                        "folder_name": "netflix_cast",
+                        "file_name": "netflix_cast.csv"
+                    },
+                    {
+                        "folder_name": "netflix_category",
+                        "file_name": "netflix_category.csv"
+                    },
+                    {
+                        "folder_name": "netflix_countries",
+                        "file_name": "netflix_countries.csv"
+                    },
+                    {
+                        "folder_name": "netflix_director",
+                        "file_name": "netflix_directors.csv"
+                    }
+                ]
+            }
+        },
+        "variables": {
+            "metadatagit": {
+                "type": "String"
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2025-07-18T09:52:22Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

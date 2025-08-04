@@ -1,0 +1,17 @@
+resources:
+  pipelines:
+    pipeline_netflix_autoloader_pipeline:
+      name: netflix_autoloader_pipeline
+      clusters:
+        - label: default
+          node_type_id: Standard_D3_v2
+          driver_node_type_id: Standard_D3_v2
+          num_workers: 1
+      libraries:
+        - notebook:
+            path: /Users/opapapeter82@gmail.com/Netflix Project/1_dlt_autoloader
+      schema: dlt_schema
+      development: true
+      edition: CORE
+      channel: PREVIEW
+      catalog: netflix_project_catalog
